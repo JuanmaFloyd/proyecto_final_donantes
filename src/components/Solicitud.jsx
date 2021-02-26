@@ -1,5 +1,7 @@
 import { Button, Card, CardActions, CardContent, Divider, Typography } from '@material-ui/core'
+import axios from 'axios'
 import React from 'react'
+import swal from 'sweetalert'
 
 export const Solicitud = (props) => {
 
@@ -21,6 +23,16 @@ export const Solicitud = (props) => {
                          .replace('AM', 'a.m.');
     }
 
+    const handleDonacion = () => {
+        var data = {
+            fecha: new Date(),
+            solicitud: props.solicitud._id 
+        }
+
+        axios.post("http://localhost:5000/donacion", data, {"headers": {"token": sessionStorage.getItem("dtoken")}})
+            .then(() => swal("Donacion registrada", "", "success"))
+    }
+
     return(
         <Card>
             <CardContent>
@@ -31,7 +43,7 @@ export const Solicitud = (props) => {
                 <Typography>{"Hospital: "+props.hospital}</Typography>
             </CardContent>
             <CardActions>
-                <Button size="small" color="primary">
+                <Button size="small" color="primary" onClick={() => handleDonacion()}>
                     Donar!
                 </Button>
             </CardActions>

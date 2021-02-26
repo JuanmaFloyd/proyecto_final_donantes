@@ -1,20 +1,18 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Navbar } from "./components/Navbar/Navbar";
 import { SignUp } from "./components/Auth/SignUp";
-import { Solicitudes } from "./components/Solicitudes";
 import { LogIn } from "./components/Auth/LogIn";
 import { Auth } from "./components/Middleware/Auth";
+import AuthRoutes from "./components/Middleware/AuthRoutes";
 
 function App() {
   return (
     <div>
         <Router>
-        <Navbar />
             <Switch>
                 <Route path='/signup' component={SignUp}/>
                 <Route path='/login' component={LogIn}/>
                 <Auth>
-                  <Route path='/solicitudes' component={Solicitudes}/> 
+                  <Route path='/' component={AuthRoutes} />
                 </Auth>
             </Switch>
         </Router>
