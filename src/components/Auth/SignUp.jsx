@@ -1,7 +1,50 @@
-import { Container, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@material-ui/core'
+import { Button, Container, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@material-ui/core'
+import axios from 'axios';
 import React from 'react'
+import { useState } from 'react';
+import swal from 'sweetalert';
 
 export const SignUp = () => {
+    const [nombre, setNombre] = useState("");
+    const [apellido, setApelldio] = useState("");
+    const [dni, setDni] = useState("");
+    const [fechanac, setFechanac] = useState("");
+    const [sexo, setSexo] = useState("");
+    const [domicilio, setDomicilio] = useState("");
+    const [localidad, setLocalidad] = useState("");
+    const [domiciliodni, setDomiciliodni] = useState("");
+    const [localidaddni, setLocalidaddni] = useState("");
+    const [telefono, setTelefono] = useState("");
+    const [cp, setCp] = useState("");
+    const [mail, setMail] = useState("");
+    const [lugarnac, setLugarnac] = useState("");
+    const [ocupacion, setOcupacion] = useState("");
+    const [tipo, setTipo] = useState("");
+
+    const handleSave = () => {
+        var data = {
+            nombre: nombre,
+            apellido: apellido,
+            dni: dni,
+            fechaNac: fechanac,
+            sexo: sexo,
+            domicilio: domicilio,
+            localidad: localidad,
+            domicilioDNI: domiciliodni,
+            localidadDNI: localidaddni,
+            telefono: telefono,
+            codPostal: cp,
+            mail: mail,
+            lugarNac: lugarnac,
+            ocupacion: ocupacion,
+            tipoDeSangre: tipo,
+            password: '123123'
+        }
+        
+        axios.post("http://localhost:5000/donante/signup", data)
+            .then(() => swal("Donante guardado", "", "success"))
+    }
+
     return(
         <Container>
             <Typography variant='h6'>Datos personales</Typography>
@@ -12,6 +55,7 @@ export const SignUp = () => {
                         name="nombre"
                         label="Nombre"
                         fullWidth
+                        onChange={(event) => setNombre(event.target.value)}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -20,6 +64,7 @@ export const SignUp = () => {
                         name="apellido"
                         label="Apellido"
                         fullWidth
+                        onChange={(event) => setApelldio(event.target.value)}
                     />
                 </Grid>
                 <Grid item xs={12} sm={12}>
@@ -28,6 +73,7 @@ export const SignUp = () => {
                         name="dni"
                         label="DNI"
                         fullWidth
+                        onChange={(event) => setDni(event.target.value)}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -38,6 +84,7 @@ export const SignUp = () => {
                         type="date"
                         defaultValue="1999-01-01"
                         fullWidth
+                        onChange={(event) => setFechanac(event.target.value)}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -46,6 +93,8 @@ export const SignUp = () => {
                         <Select
                             id="sexo"
                             name="sexo"
+                            value={sexo}
+                            onChange={(event) => setSexo(event.target.value)}
                         >
                             <MenuItem value={"femenino"}>femenino</MenuItem>
                             <MenuItem value={"masculino"}>masculino</MenuItem>    
@@ -58,6 +107,7 @@ export const SignUp = () => {
                         name="domicilio"
                         label="Domicilio"
                         fullWidth
+                        onChange={(event) => setDomicilio(event.target.value)}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -66,6 +116,7 @@ export const SignUp = () => {
                         name="localidad"
                         label="Localidad"
                         fullWidth
+                        onChange={(event) => setLocalidad(event.target.value)}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -74,6 +125,7 @@ export const SignUp = () => {
                         name="domicilioDNI"
                         label="Domicilio del DNI"
                         fullWidth
+                        onChange={(event) => setDomiciliodni(event.target.value)}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -82,6 +134,7 @@ export const SignUp = () => {
                         name="localidadDNI"
                         label="Localidad del DNI"
                         fullWidth
+                        onChange={(event) => setLocalidaddni(event.target.value)}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -91,6 +144,7 @@ export const SignUp = () => {
                         label="Teléfono"
                         type="Number"
                         fullWidth
+                        onChange={(event) => setTelefono(event.target.value)}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -100,6 +154,7 @@ export const SignUp = () => {
                         label="Código postal"
                         type="Number"
                         fullWidth
+                        onChange={(event) => setCp(event.target.value)}
                     />
                 </Grid>
                 <Grid item xs={12} sm={12}>
@@ -108,6 +163,7 @@ export const SignUp = () => {
                         name="mail"
                         label="E-mail"
                         fullWidth
+                        onChange={(event) => setMail(event.target.value)}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -116,6 +172,7 @@ export const SignUp = () => {
                         name="lugarNac"
                         label="Lugar de nacimiento"
                         fullWidth
+                        onChange={(event) => setLugarnac(event.target.value)}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -124,6 +181,7 @@ export const SignUp = () => {
                         name="ocupacion"
                         label="Ocupación"
                         fullWidth
+                        onChange={(event) => setOcupacion(event.target.value)}
                     />
                 </Grid>
                 <Grid item xs={12} sm={12}>
@@ -132,6 +190,8 @@ export const SignUp = () => {
                         <Select
                             id="tipo"
                             name="tipo"
+                            value={tipo}
+                            onChange={(event) => setTipo(event.target.value)}
                         >
                             <MenuItem value={"0+"}>0+</MenuItem>
                             <MenuItem value={"0-"}>0-</MenuItem>
@@ -143,6 +203,9 @@ export const SignUp = () => {
                             <MenuItem value={"AB-"}>AB-</MenuItem>
                         </Select>
                     </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                    <Button variant="contained" color="primary" onClick={() => handleSave()}>Registrarse</Button>
                 </Grid>
             </Grid>
         </Container>
