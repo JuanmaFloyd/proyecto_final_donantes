@@ -26,11 +26,13 @@ export const Solicitud = (props) => {
     const handleDonacion = () => {
         var data = {
             fecha: new Date(),
-            solicitud: props.solicitud._id 
+            solicitud: props.solicitud._id,
+            hospital: props.solicitud.hospital
         }
 
         axios.post("http://localhost:5000/donacion", data, {"headers": {"token": sessionStorage.getItem("dtoken")}})
             .then(() => swal("Donacion registrada", "", "success"))
+            .catch(err => swal(err.response.data.message, "", "error"));
     }
 
     return(
