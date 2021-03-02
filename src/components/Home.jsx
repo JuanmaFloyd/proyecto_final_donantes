@@ -29,7 +29,7 @@ export const Home = () => {
         <Container>
             <Card>
                 <CardContent>
-                    <Typography variant="h5">{(donante.sexo === "masculino") ? "Bienvenido, "+donante.nombre : "Bienvenida, "+donante.nombre}</Typography>
+                    <Typography variant="h4">{(donante.sexo === "masculino") ? "Bienvenido, "+donante.nombre : "Bienvenida, "+donante.nombre}</Typography>
                     <Box m={2}>
                         <Divider variant="middle" />
                     </Box>
