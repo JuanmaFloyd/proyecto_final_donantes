@@ -4,6 +4,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { Solicitud } from './Solicitud';
+import { Spinner } from './Spinner';
 
 export const Solicitudes = () => {
     const [solicitudes, setSolicitudes] = useState([])
@@ -54,6 +55,6 @@ export const Solicitudes = () => {
                 </Grid>
             ))}
             </Grid>
-        </Container> : null
+        </Container> : <Spinner />
     )
 }
