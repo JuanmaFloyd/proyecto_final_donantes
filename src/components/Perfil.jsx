@@ -21,11 +21,15 @@ export const Perfil = () => {
     }, [])
 
     function parseDate(fecha) {
-        if(donante != null){
-            return fecha.slice(9,10)+"/"+fecha.slice(6,7)+"/"+fecha.slice(0,4)
-        }
-        
+        return fecha.slice(9,10)+"/"+fecha.slice(6,7)+"/"+fecha.slice(0,4)        
     }
+
+    function diasUltDonacion(){
+        var hoy = new Date()
+        var ultimaDon = new Date(donante.fechaDonacion)
+        return Math.floor((hoy.getTime() - ultimaDon.getTime()) / (1000 * 3600 * 24))
+    }
+
     return(
         donante ?
         <Container>
@@ -108,7 +112,7 @@ export const Perfil = () => {
                 <Grid item xs={4}>
                     <Card>
                         <CardContent>
-                            Última Donación: {parseDate(donante.fechaDonacion)}    
+                            Última Donación: {parseDate(donante.fechaDonacion)} (hace {diasUltDonacion()} días)
                             </CardContent>
                     </Card>
                 </Grid>
