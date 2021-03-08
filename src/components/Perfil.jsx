@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Box, Grid, Card, CardContent, Container, Divider, makeStyles, Typography, Form } from '@material-ui/core'
+import { Box, Grid, Card, CardContent, Container, Divider, makeStyles, Typography } from '@material-ui/core'
 
 const useStyles = makeStyles({
     card: {
@@ -20,17 +20,12 @@ export const Perfil = () => {
             .then(response => setDonante(response.data))
     }, [])
 
-    const fechaNac = () => {
-        return new Date(donante.fechaNac)
-    }
-
-    function parseDate() {
+    function parseDate(fecha) {
         if(donante != null){
-            return fechaNac().getDay()+"/"+(fechaNac().getMonth()+1)+"/"+fechaNac().getFullYear()
+            return fecha.slice(9,10)+"/"+fecha.slice(6,7)+"/"+fecha.slice(0,4)
         }
         
     }
-
     return(
         donante ?
         <Container>
@@ -64,12 +59,12 @@ export const Perfil = () => {
                 <Grid item xs={4}>
                     <Card>
                         <CardContent>
-                            Fecha de nacimiento: {donante.fechaNac} {parseDate()}
+                            Fecha de nacimiento: {parseDate(donante.fechaNac)}
                         </CardContent>
                     </Card>
                 </Grid>
                 <Grid item xs={4}>
-                    <Card>
+                    <Card>  
                         <CardContent>
                             Sexo: {donante.sexo} 
                         </CardContent>
@@ -113,7 +108,7 @@ export const Perfil = () => {
                 <Grid item xs={4}>
                     <Card>
                         <CardContent>
-                            Última Donación: {donante.fechaDonacion}    
+                            Última Donación: {parseDate(donante.fechaDonacion)}    
                             </CardContent>
                     </Card>
                 </Grid>
