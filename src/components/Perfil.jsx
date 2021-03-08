@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Box, Card, CardContent, Container, Divider, makeStyles, Typography, Form } from '@material-ui/core'
+import { Box, Grid, Card, CardContent, Container, Divider, makeStyles, Typography, Form } from '@material-ui/core'
 
 const useStyles = makeStyles({
     card: {
@@ -34,52 +34,90 @@ export const Perfil = () => {
     return(
         donante ?
         <Container>
-            <form>
-                <label>
-                    Nombre y apellido: {donante.nombre} {donante.apellido}
-                </label>
-                <div></div>
-                <label>
-                    DNI: {donante.dni}
-                </label>
-                <div></div>
-                <label>
-                    Tipo de sangre: {donante.tipoDeSangre}
-                </label>
-                <div></div>
-                <label>
-                    Fecha de nacimiento: {donante.fechaNac} {parseDate()}
-                </label>
-                <div></div>
-                <label>
-                    Sexo: {donante.sexo}
-                </label>
-                <div></div>
-                <label>
-                    Domicilio {donante.domicilio}
-                </label>
-                <div></div>
-                <label>
-                    Localidad: {donante.localidad}
-                </label>
-                <div></div>
-                <label>
-                    Telefono: {donante.telefono}
-                </label>
-                <div></div>
-                <label>
-                    Mail: {donante.mail}
-                </label>
-                <div></div>
-                <label>
-                    Ocupación: {donante.ocupacion}
-                </label>
-                <div></div>
-                <label>
-                    Última Donación: {donante.fechaDonacion}
-                </label>
-            </form>
-
+            <Grid style={{ padding: 10 }} container spacing={3}>
+                <Grid item xs={12}>
+                    <Card>
+                        <CardContent>
+                            <Typography gutterBottom={'true'} align={'center'} variant="h4">{donante.nombre} {donante.apellido}</Typography>
+                        </CardContent>
+                    </Card>
+                    <Grid item xs={12}>
+                        <Box align={'center'} m={2}>
+                            <Divider variant="middle" />
+                        </Box>
+                    </Grid>
+                </Grid>
+                <Grid item xs={4}>
+                    <Card>
+                        <CardContent>
+                            DNI: {donante.dni}
+                        </CardContent>
+                    </Card>
+                </Grid>
+                <Grid item xs={4}>
+                    <Card>
+                        <CardContent>
+                            Tipo de sangre: {donante.tipoDeSangre}
+                            </CardContent>
+                    </Card>
+                </Grid>
+                <Grid item xs={4}>
+                    <Card>
+                        <CardContent>
+                            Fecha de nacimiento: {donante.fechaNac} {parseDate()}
+                        </CardContent>
+                    </Card>
+                </Grid>
+                <Grid item xs={4}>
+                    <Card>
+                        <CardContent>
+                            Sexo: {donante.sexo} 
+                        </CardContent>
+                    </Card>
+                </Grid>
+                <Grid item xs={4}>
+                    <Card>
+                        <CardContent>
+                            Domicilio: {donante.domicilio}
+                        </CardContent>
+                    </Card>
+                </Grid>
+                <Grid item xs={4}>
+                    <Card>
+                        <CardContent>
+                            Localidad: {donante.localidad}
+                            </CardContent>
+                    </Card>
+                </Grid>
+                <Grid item xs={4}>
+                    <Card>
+                        <CardContent>
+                            Telefono: {donante.telefono}  
+                            </CardContent>
+                    </Card>
+                </Grid>
+                <Grid item xs={4}>
+                    <Card>
+                        <CardContent>
+                            Mail: {donante.mail}     
+                            </CardContent>
+                    </Card>
+                </Grid>
+                <Grid item xs={4}>
+                    <Card>
+                        <CardContent>
+                            Ocupación: {donante.ocupacion}    
+                            </CardContent>
+                    </Card>
+                </Grid>
+                <Grid item xs={4}>
+                    <Card>
+                        <CardContent>
+                            Última Donación: {donante.fechaDonacion}    
+                            </CardContent>
+                    </Card>
+                </Grid>
+            </Grid>
         </Container>
         : null
     )
