@@ -34,7 +34,7 @@ export const Home = () => {
                         <Divider variant="middle" />
                     </Box>
                     <Typography variant="subtitle1" color="primary">
-                        {"Su última fecha de donación es el "+fechaDon().getDay()+"/"+(fechaDon().getMonth()+1)+"/"+fechaDon().getFullYear()+ "."}
+                        {"Su última fecha de donación es el "+fechaDon().getDate()+"/"+(fechaDon().getMonth()+1)+"/"+fechaDon().getFullYear()+ "."}
                     </Typography>
                 </CardContent>
             </Card>
