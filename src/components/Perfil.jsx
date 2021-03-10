@@ -21,7 +21,8 @@ export const Perfil = () => {
     }, [])
 
     function parseDate(fecha) {
-        return fecha.slice(9,10)+"/"+fecha.slice(6,7)+"/"+fecha.slice(0,4)        
+        var date = new Date(fecha)
+        return (date.getDate()+1)+"/"+(date.getMonth()+1)+"/"+date.getFullYear()        
     }
 
     function diasUltDonacion(){
@@ -113,7 +114,7 @@ export const Perfil = () => {
                     <Card>
                         <CardContent>
                             Última Donación: {parseDate(donante.fechaDonacion)} (hace {diasUltDonacion()} días)
-                            </CardContent>
+                        </CardContent>
                     </Card>
                 </Grid>
             </Grid>
