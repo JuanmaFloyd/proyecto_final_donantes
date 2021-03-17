@@ -2,6 +2,7 @@ import { Button, Container, FormControl, Grid, InputLabel, MenuItem, Select, Tex
 import axios from 'axios';
 import React from 'react'
 import { useState } from 'react';
+import { useHistory } from 'react-router';
 import swal from 'sweetalert';
 
 export const SignUp = () => {
@@ -20,6 +21,7 @@ export const SignUp = () => {
     const [lugarnac, setLugarnac] = useState("");
     const [ocupacion, setOcupacion] = useState("");
     const [tipo, setTipo] = useState("");
+    const history = useHistory();
 
     const handleSave = () => {
         var data = {
@@ -42,7 +44,24 @@ export const SignUp = () => {
         }
         
         axios.post("http://localhost:5000/donante/signup", data)
-            .then(() => swal("Donante guardado", "", "success"))
+            .then(() => { 
+                swal("Donante guardado", "", "success")
+            
+                var dataLogin = {
+                    dni: dni,
+                    password: '123123'
+                }
+              
+                axios.post("http://localhost:5000/donante/signin", dataLogin)
+                    .then(res => {
+                        sessionStorage.setItem("dtoken", res.data);
+                        history.push("/");
+                    })
+                    .catch(
+                        () => swal("Nickname o contraseña incorrectos", "", "error")
+                    )
+            
+            }) 
     }
 
     return(
