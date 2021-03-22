@@ -76,7 +76,10 @@ export const SignUp = () => {
                             () => swal("Nickname o contraseña incorrectos", "", "error")
                         )
                 
-                }) 
+                })
+                .catch((error) => {
+                    swal(error.response.data, "", "error")
+                })
         })
     }
 
