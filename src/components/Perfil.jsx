@@ -1,18 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Box, Grid, Card, CardContent, Container, Divider, makeStyles, Typography } from '@material-ui/core'
-
-const useStyles = makeStyles({
-    card: {
-        display: 'flex',
-    },
-    cardDetails: {
-        flex: 1,
-    },
-})
+import { Box, Grid, Card, CardContent, Container, Divider, Typography } from '@material-ui/core'
 
 export const Perfil = () => {
-    const classes = useStyles();
     const [donante, setDonante] = useState("")
     
     useEffect(() => {

@@ -1,5 +1,4 @@
 import { Button, Container, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@material-ui/core'
-import { LocationSearchingOutlined } from '@material-ui/icons';
 import axios from 'axios';
 import React from 'react'
 import { useState } from 'react';
@@ -31,6 +30,11 @@ export const SignUp = () => {
                 key: "AIzaSyDI4eXkh46mcHYH1Qfuxp4x18sBgQG7pfc"
             }
         }).then(res => {
+            if (res.data.results.length === 0) {
+                swal("Revise que su domicilio y ciudad sean válidos.", "", "error")
+                return;
+            }
+
             var location = res.data.results[0].geometry.location
             
             var data = {

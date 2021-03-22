@@ -1,18 +1,8 @@
-import { Box, Card, CardContent, Container, Divider, makeStyles, Typography } from '@material-ui/core'
+import { Box, Card, CardContent, Container, Divider, Typography } from '@material-ui/core'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
-const useStyles = makeStyles({
-    card: {
-        display: 'flex',
-    },
-    cardDetails: {
-        flex: 1,
-    },
-})
-
 export const Home = () => {
-    const classes = useStyles();
     const [donante, setDonante] = useState("")
 
     useEffect(() => {
