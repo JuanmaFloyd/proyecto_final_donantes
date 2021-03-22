@@ -1,4 +1,5 @@
 import { Button, Container, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@material-ui/core'
+import { LocationSearchingOutlined } from '@material-ui/icons';
 import axios from 'axios';
 import React from 'react'
 import { useState } from 'react';
@@ -24,44 +25,55 @@ export const SignUp = () => {
     const history = useHistory();
 
     const handleSave = () => {
-        var data = {
-            nombre: nombre,
-            apellido: apellido,
-            dni: dni,
-            fechaNac: fechanac,
-            sexo: sexo,
-            domicilio: domicilio,
-            localidad: localidad,
-            domicilioDNI: domiciliodni,
-            localidadDNI: localidaddni,
-            telefono: telefono,
-            codPostal: cp,
-            mail: mail,
-            lugarNac: lugarnac,
-            ocupacion: ocupacion,
-            tipoDeSangre: tipo,
-            password: '123123'
-        }
-        
-        axios.post("http://localhost:5000/donante/signup", data)
-            .then(() => { 
-                swal("Donante guardado", "", "success")
+        axios.get("https://maps.googleapis.com/maps/api/geocode/json", {
+            params: {
+                address: domicilio + ", " + localidad,
+                key: "AIzaSyDI4eXkh46mcHYH1Qfuxp4x18sBgQG7pfc"
+            }
+        }).then(res => {
+            var location = res.data.results[0].geometry.location
             
-                var dataLogin = {
-                    dni: dni,
-                    password: '123123'
-                }
-              
-                axios.post("http://localhost:5000/donante/signin", dataLogin)
-                    .then(res => {
-                        sessionStorage.setItem("dtoken", res.data);
-                        history.push("/");
-                    })
-                    .catch(
-                        () => swal("Nickname o contraseña incorrectos", "", "error")
-                    )
-            
-            }) 
+            var data = {
+                nombre: nombre,
+                apellido: apellido,
+                dni: dni,
+                fechaNac: fechanac,
+                sexo: sexo,
+                domicilio: domicilio,
+                localidad: localidad,
+                domicilioDNI: domiciliodni,
+                localidadDNI: localidaddni,
+                telefono: telefono,
+                codPostal: cp,
+                mail: mail,
+                lugarNac: lugarnac,
+                ocupacion: ocupacion,
+                tipoDeSangre: tipo,
+                latitud: location.lat,
+                longitud: location.lng,
+                password: '123123'
+            }
+
+            axios.post("http://localhost:5000/donante/signup", data)
+                .then(() => { 
+                    swal("Donante guardado", "", "success")
+                
+                    var dataLogin = {
+                        dni: dni,
+                        password: '123123'
+                    }
+                
+                    axios.post("http://localhost:5000/donante/signin", dataLogin)
+                        .then(res => {
+                            sessionStorage.setItem("dtoken", res.data);
+                            history.push("/");
+                        })
+                        .catch(
+                            () => swal("Nickname o contraseña incorrectos", "", "error")
+                        )
+                
+                }) 
+        })
     }
 
     return(
