@@ -2,6 +2,7 @@ import { Button, Card, CardActions, CardContent, Divider, Typography } from '@ma
 import axios from 'axios'
 import React from 'react'
 import swal from 'sweetalert'
+import Swal from 'sweetalert2'
 
 export const Solicitud = (props) => {
 
@@ -24,15 +25,24 @@ export const Solicitud = (props) => {
     }
 
     const handleDonacion = () => {
-        var data = {
-            fecha: new Date(),
-            solicitud: props.solicitud._id,
-            hospital: props.solicitud.hospital
-        }
-
-        axios.post("http://localhost:5000/donacion", data, {"headers": {"token": sessionStorage.getItem("dtoken")}})
-            .then(() => swal("Donacion registrada", "", "success"))
-            .catch(err => swal(err.response.data.message, "", "error"));
+        Swal.fire({
+            title: "Desea inscribirse para donar a "+props.solicitud.persona+"?",
+            showDenyButton: true,
+            denyButtonText: "No, cancelar",
+            confirmButtonText: "Sí, deseo inscrbirme"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var data = {
+                    fecha: new Date(),
+                    solicitud: props.solicitud._id,
+                    hospital: props.solicitud.hospital
+                }
+        
+                axios.post("http://localhost:5000/donacion", data, {"headers": {"token": sessionStorage.getItem("dtoken")}})
+                    .then(() => swal("Donacion registrada", "", "success"))
+                    .catch(err => swal(err.response.data.message, "", "error"));
+            }
+        })
     }
 
     return(
@@ -43,6 +53,7 @@ export const Solicitud = (props) => {
                 <Typography>{"Fecha de creación: "+fecha(props.solicitud.fecha)}</Typography>
                 <Typography>{"Donaciones: "+props.solicitud.donantes+"/"+props.solicitud.cantidad}</Typography>
                 <Typography>{"Hospital: "+props.hospital}</Typography>
+                <Typography>{"Persona beneficiada: "+props.solicitud.persona}</Typography>
             </CardContent>
             <CardActions>
                 <Button size="small" color="primary" onClick={() => handleDonacion()}>

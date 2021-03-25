@@ -9,7 +9,7 @@ export const SignUp = () => {
     const [nombre, setNombre] = useState("");
     const [apellido, setApelldio] = useState("");
     const [dni, setDni] = useState("");
-    const [fechanac, setFechanac] = useState("");
+    const [fechanac, setFechanac] = useState("1999-01-01");
     const [sexo, setSexo] = useState("");
     const [domicilio, setDomicilio] = useState("");
     const [localidad, setLocalidad] = useState("");
@@ -21,6 +21,7 @@ export const SignUp = () => {
     const [lugarnac, setLugarnac] = useState("");
     const [ocupacion, setOcupacion] = useState("");
     const [tipo, setTipo] = useState("");
+    const [pass, setPass] = useState("");
     const history = useHistory();
 
     const handleSave = () => {
@@ -55,9 +56,9 @@ export const SignUp = () => {
                 tipoDeSangre: tipo,
                 latitud: location.lat,
                 longitud: location.lng,
-                password: '123123'
+                password: pass
             }
-
+            
             axios.post("http://localhost:5000/donante/signup", data)
                 .then(() => { 
                     swal("Donante guardado", "", "success")
@@ -105,7 +106,7 @@ export const SignUp = () => {
                         onChange={(event) => setApelldio(event.target.value)}
                     />
                 </Grid>
-                <Grid item xs={12} sm={12}>
+                <Grid item xs={12} sm={6}>
                     <TextField 
                         id="dni"
                         name="dni"
@@ -113,6 +114,26 @@ export const SignUp = () => {
                         fullWidth
                         onChange={(event) => setDni(event.target.value)}
                     />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <FormControl fullWidth>
+                        <InputLabel>Tipo de sangre</InputLabel>
+                        <Select
+                            id="tipo"
+                            name="tipo"
+                            value={tipo}
+                            onChange={(event) => setTipo(event.target.value)}
+                        >
+                            <MenuItem value={"0+"}>0+</MenuItem>
+                            <MenuItem value={"0-"}>0-</MenuItem>
+                            <MenuItem value={"A+"}>A+</MenuItem>
+                            <MenuItem value={"A-"}>A-</MenuItem>
+                            <MenuItem value={"B+"}>B+</MenuItem>
+                            <MenuItem value={"B-"}>B-</MenuItem>
+                            <MenuItem value={"AB+"}>AB+</MenuItem>
+                            <MenuItem value={"AB-"}>AB-</MenuItem>
+                        </Select>
+                    </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <TextField 
@@ -195,13 +216,22 @@ export const SignUp = () => {
                         onChange={(event) => setCp(event.target.value)}
                     />
                 </Grid>
-                <Grid item xs={12} sm={12}>
+                <Grid item xs={12} sm={6}>
                     <TextField 
                         id="mail"
                         name="mail"
                         label="E-mail"
                         fullWidth
                         onChange={(event) => setMail(event.target.value)}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField 
+                        id="pass"
+                        name="pass"
+                        label="Contraseña"
+                        fullWidth
+                        onChange={(event) => setPass(event.target.value)}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -222,26 +252,7 @@ export const SignUp = () => {
                         onChange={(event) => setOcupacion(event.target.value)}
                     />
                 </Grid>
-                <Grid item xs={12} sm={12}>
-                    <FormControl fullWidth>
-                        <InputLabel>Tipo de sangre</InputLabel>
-                        <Select
-                            id="tipo"
-                            name="tipo"
-                            value={tipo}
-                            onChange={(event) => setTipo(event.target.value)}
-                        >
-                            <MenuItem value={"0+"}>0+</MenuItem>
-                            <MenuItem value={"0-"}>0-</MenuItem>
-                            <MenuItem value={"A+"}>A+</MenuItem>
-                            <MenuItem value={"A-"}>A-</MenuItem>
-                            <MenuItem value={"B+"}>B+</MenuItem>
-                            <MenuItem value={"B-"}>B-</MenuItem>
-                            <MenuItem value={"AB+"}>AB+</MenuItem>
-                            <MenuItem value={"AB-"}>AB-</MenuItem>
-                        </Select>
-                    </FormControl>
-                </Grid>
+                
                 <Grid item xs={12} sm={12}>
                     <Button variant="contained" color="primary" onClick={() => handleSave()}>Registrarse</Button>
                 </Grid>
