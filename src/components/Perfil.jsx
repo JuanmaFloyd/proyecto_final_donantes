@@ -103,7 +103,9 @@ export const Perfil = () => {
                 <Grid item xs={4}>
                     <Card>
                         <CardContent>
-                            Última Donación: {parseDate(donante.fechaDonacion)} (hace {diasUltDonacion()} días)
+                            Última Donación: { donante.fechaDonacion ?
+                                parseDate(donante.fechaDonacion) + " (hace " + diasUltDonacion() +" días)." 
+                                : "Sin donaciones"}
                         </CardContent>
                     </Card>
                 </Grid>

@@ -46,7 +46,8 @@ export const Solicitudes = () => {
     }
     
     return(
-        hospitales.length > 0 ?
+        hospitales && solicitudes ?
+        solicitudesPorTipo().length > 0 && hospitales.length > 0 ?
         <Container>
             <Grid container spacing={4}>
             {solicitudesPorTipo().map(solicitud => (
@@ -55,6 +56,6 @@ export const Solicitudes = () => {
                 </Grid>
             ))}
             </Grid>
-        </Container> : <Spinner />
+        </Container> : <h1>No hay solicitudes disponibles.</h1> : <Spinner />
     )
 }

@@ -61,7 +61,7 @@ export const SignUp = () => {
             
             axios.post("http://localhost:5000/donante/signup", data)
                 .then(() => { 
-                    swal("Donante guardado", "", "success")
+                    swal("Has sido registrado!", "", "success")
                 
                     var dataLogin = {
                         dni: dni,
@@ -73,10 +73,6 @@ export const SignUp = () => {
                             sessionStorage.setItem("dtoken", res.data);
                             history.push("/");
                         })
-                        .catch(
-                            () => swal("Nickname o contraseña incorrectos", "", "error")
-                        )
-                
                 })
                 .catch((error) => {
                     swal(error.response.data, "", "error")
@@ -230,6 +226,7 @@ export const SignUp = () => {
                         id="pass"
                         name="pass"
                         label="Contraseña"
+                        type="password"
                         fullWidth
                         onChange={(event) => setPass(event.target.value)}
                     />
