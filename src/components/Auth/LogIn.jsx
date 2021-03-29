@@ -7,7 +7,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import swal from '@sweetalert/with-react';
 import { Grid, Paper } from '@material-ui/core';
 
@@ -113,6 +113,9 @@ export const LogIn = () => {
             >
               Conectarse
             </Button>
+            <Typography>
+              <Link to="signup">Registrarse</Link>
+            </Typography>
           </div>
         </div>
       </Grid>

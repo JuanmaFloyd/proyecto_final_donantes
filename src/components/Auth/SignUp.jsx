@@ -1,6 +1,6 @@
 import { Button, Container, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@material-ui/core'
 import axios from 'axios';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { useHistory } from 'react-router';
 import swal from 'sweetalert';
@@ -23,6 +23,12 @@ export const SignUp = () => {
     const [tipo, setTipo] = useState("");
     const [pass, setPass] = useState("");
     const history = useHistory();
+
+    useEffect(() => {
+        axios.get("http://localhost:5000/donante/isAuth", {"headers": {"token": sessionStorage.getItem("dtoken")}})
+            .then(() => history.push("/"))
+            .catch(() => null)
+    }, [history])
 
     const handleSave = () => {
         axios.get("https://maps.googleapis.com/maps/api/geocode/json", {
@@ -249,10 +255,11 @@ export const SignUp = () => {
                         onChange={(event) => setOcupacion(event.target.value)}
                     />
                 </Grid>
-                
                 <Grid item xs={12} sm={12}>
+                    <Button color="secondary" onClick={() => history.push("/login")}>Cancelar</Button>
                     <Button variant="contained" color="primary" onClick={() => handleSave()}>Registrarse</Button>
                 </Grid>
+                    
             </Grid>
         </Container>
     )
