@@ -1,10 +1,11 @@
 import { Button, Card, CardActions, CardContent, Divider, Typography } from '@material-ui/core'
 import axios from 'axios'
-import React from 'react'
+import React, { useState } from 'react'
 import swal from 'sweetalert'
 import Swal from 'sweetalert2'
 
 export const Solicitud = (props) => {
+    const [donantes, setDonantes] = useState(props.solicitud.donantes)
 
     const dateFormat = {
         day:    '2-digit', 
@@ -39,7 +40,11 @@ export const Solicitud = (props) => {
                 }
         
                 axios.post("http://localhost:5000/donacion", data, {"headers": {"token": sessionStorage.getItem("dtoken")}})
-                    .then(() => swal("Donacion registrada", "", "success"))
+                    .then(() => {
+                        var donantesAct = donantes + 1
+                        setDonantes(donantesAct)
+                        swal("Donacion registrada", "", "success")
+                    })
                     .catch(err => swal(err.response.data.message, "", "error"));
             }
         })
@@ -51,7 +56,7 @@ export const Solicitud = (props) => {
                 <Typography variant="h6">Solicitud de donación abierta</Typography>
                 <Divider />
                 <Typography>{"Fecha de creación: "+fecha(props.solicitud.fecha)}</Typography>
-                <Typography>{"Donaciones: "+props.solicitud.donantes+"/"+props.solicitud.cantidad}</Typography>
+                <Typography>{"Donaciones: "+donantes+"/"+props.solicitud.cantidad}</Typography>
                 <Typography>{"Hospital: "+props.hospital}</Typography>
                 <Typography>{"Persona beneficiada: "+props.solicitud.persona+" ("+props.solicitud.tipoDeSangre+")"}</Typography>
             </CardContent>

@@ -7,8 +7,8 @@ import { Solicitud } from './Solicitud';
 import { Spinner } from './Spinner';
 
 export const Solicitudes = () => {
-    const [solicitudes, setSolicitudes] = useState([])
-    const [hospitales, setHospitales] = useState([])
+    const [solicitudes, setSolicitudes] = useState("")
+    const [hospitales, setHospitales] = useState("")
     const [donante, setDonante] = useState("")
 
     useEffect(() => {
