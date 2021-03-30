@@ -24,7 +24,7 @@ export const Home = () => {
 
     return(
         donante ?
-        <Container>
+        <Container className="mt-5">
             <Card>
                 <CardContent>
                     <Typography variant="h4">{(donante.sexo === "masculino") ? "Bienvenido, "+donante.nombre : "Bienvenida, "+donante.nombre}</Typography>
@@ -37,8 +37,9 @@ export const Home = () => {
                                 "Su última fecha de donación es el "+(fechaDon().getDate()+1)+"/"+(fechaDon().getMonth()+1)+"/"+fechaDon().getFullYear()+ "." 
                                 : "Usted aún no ha realizado donaciones."
                             ) :
+                            persona !== "" && hospital !== "" ?
                             "Usted se encuentra en lista para la solicitud correspondiente a "+persona+
-                            ". Para efectuar la donación, diríjase al hospital "+hospital+"."
+                            ". Para efectuar la donación, diríjase al hospital "+hospital+"." : null
                         }
                     </Typography>
                 </CardContent>
