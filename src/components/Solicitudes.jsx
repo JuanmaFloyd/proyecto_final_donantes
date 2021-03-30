@@ -48,7 +48,7 @@ export const Solicitudes = () => {
     return(
         hospitales && solicitudes ?
         solicitudesPorTipo().length > 0 && hospitales.length > 0 ?
-        <Container>
+        <Container className="my-4">
             <Grid container spacing={4}>
             {solicitudesPorTipo().map(solicitud => (
                 <Grid item xs={12} sm={6} md={4}>

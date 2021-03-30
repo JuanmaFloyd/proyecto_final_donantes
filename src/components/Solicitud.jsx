@@ -53,7 +53,7 @@ export const Solicitud = (props) => {
                 <Typography>{"Fecha de creación: "+fecha(props.solicitud.fecha)}</Typography>
                 <Typography>{"Donaciones: "+props.solicitud.donantes+"/"+props.solicitud.cantidad}</Typography>
                 <Typography>{"Hospital: "+props.hospital}</Typography>
-                <Typography>{"Persona beneficiada: "+props.solicitud.persona}</Typography>
+                <Typography>{"Persona beneficiada: "+props.solicitud.persona+" ("+props.solicitud.tipoDeSangre+")"}</Typography>
             </CardContent>
             <CardActions>
                 <Button size="small" color="primary" onClick={() => handleDonacion()}>
