@@ -1,4 +1,5 @@
 import { Button, Container, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@material-ui/core'
+import { KeyboardReturnOutlined } from '@material-ui/icons';
 import axios from 'axios';
 import React, { useEffect } from 'react'
 import { useState } from 'react';
@@ -30,7 +31,26 @@ export const SignUp = () => {
             .catch(() => null)
     }, [history])
 
+    var validarFechaNac = (f) => {
+        var hoy = new Date();
+        var fecha = new Date(f);
+        var edad = hoy.getFullYear() - fecha.getFullYear();
+        var m = hoy.getMonth() - fecha.getMonth();
+        if (m < 0 || (m === 0 && hoy.getDate() < fecha.getDate())) {
+            edad--;
+        }
+        if(edad < 18){ 
+            return false
+        }
+        return true;
+    }
+
     const handleSave = () => {
+        if(validarFechaNac(fechanac) === false){
+            swal("Debe ser mayor de 18 años.", "", "error");
+            return;
+        }
+
         axios.get("https://maps.googleapis.com/maps/api/geocode/json", {
             params: {
                 address: domicilio + ", " + localidad,
@@ -41,6 +61,7 @@ export const SignUp = () => {
                 swal("Revise que su domicilio y ciudad sean válidos.", "", "error")
                 return;
             }
+
 
             var location = res.data.results[0].geometry.location
             
