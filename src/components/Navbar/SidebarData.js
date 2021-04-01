@@ -1,5 +1,5 @@
 import React from 'react';
-import { AiFillHome, AiFillDatabase, AiFillSmile, AiOutlineLogout } from "react-icons/ai";
+import { AiFillHome, AiFillDatabase, AiFillSmile } from "react-icons/ai";
 
 export const SidebarData = [
     {

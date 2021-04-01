@@ -12,8 +12,7 @@ export const Auth = (props) => {
         Axios.get("http://localhost:5000/donante/isAuth", {"headers": {"token": sessionStorage.getItem("dtoken")}})
             .then(() => setAuth(true))
             .catch(() => {
-                swal("Debes estar logueado para acceder a este recurso", "", "error")
-                    .then(() => history.push("/login"));
+                 history.push("/login");
             })
     })
     
