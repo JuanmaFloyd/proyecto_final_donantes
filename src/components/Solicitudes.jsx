@@ -16,10 +16,10 @@ export const Solicitudes = () => {
             .then(response => setDonante(response.data))
             
         axios.get("http://localhost:5000/solicitud")
-            .then(response => setSolicitudes(response.data.filter(solicitud => solicitud.estado !== "Cerrada")))
+            .then(response => setSolicitudes(response.data.docs.filter(solicitud => solicitud.estado !== "Cerrada")))
         
         axios.get("http://localhost:5000/hospital")
-            .then(response => setHospitales(response.data))
+            .then(response => setHospitales(response.data.docs))
     }, [])
 
     const nombreHospital = (id) => {
