@@ -19,11 +19,5 @@ export const SidebarData = [
         path: '/perfil',
         icon: <AiFillSmile />,
         cName: 'nav-text'
-    },
-    {
-        title: 'Cerrar Sesión',
-        path: '/logout',
-        icon: <AiOutlineLogout />,
-        cName: 'nav-text'
     }
 ] 
