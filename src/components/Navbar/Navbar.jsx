@@ -14,7 +14,7 @@ export const Navbar = () => {
 
     const logout = () => {
         sessionStorage.removeItem("dtoken");
-        history.push("/");
+        history.push("/login");
     }
 
     return (
