@@ -39,7 +39,7 @@ export const Home = () => {
                             ) :
                             persona !== "" && hospital !== "" ?
                             "Usted se encuentra en lista para la solicitud correspondiente a "+persona+
-                            ". Para efectuar la donación, diríjase al hospital "+hospital+"." : null
+                            ". Para efectuar la donación, diríjase al hospital "+hospital+"." : "Cargando..."
                         }
                     </Typography>
                 </CardContent>
