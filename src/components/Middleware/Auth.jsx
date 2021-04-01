@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
-import Axios from 'axios'
-import swal from '@sweetalert/with-react';
+import Axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
 export const Auth = (props) => {
