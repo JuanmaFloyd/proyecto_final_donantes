@@ -30,13 +30,13 @@ export const Navbar = () => {
     return (
         <Fragment> 
             <IconContext.Provider value={{color: '#fff'} }>
-            <div className="navbar">
+            <div className="navbar sticky-top">
                 <Link to="#" className="menu-bars">
                     <FaIcons.FaBars onClick={showSidebar} />
                 </Link>
                 <h1 className="title pl-2 ml-auto">Banco de sangre</h1>
             </div>
-            <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
+            <nav className={sidebar ? 'nav-menu active position-fixed' : 'nav-menu position-fixed'}>
                 <ul className='nav-menu-items' onClick={showSidebar}>
                     <li className="navbar-toggle">
                         <Link to="#" className='menu-bars'>
@@ -48,7 +48,7 @@ export const Navbar = () => {
                             <li key={index} className={item.cName}>
                                 <Link to={item.path}>
                                     {item.icon}
-                                    <span>{item.title}</span>
+                                    <span className="ml-3">{item.title}</span>
                                 </Link>
                             </li>
 
@@ -57,7 +57,7 @@ export const Navbar = () => {
                     <li className={'nav-text'}>
                         <Link to="#" onClick={() => logout()}>
                             <AiIcons.AiOutlineLogout />
-                            <span>Cerrar sesión</span>
+                            <span className="ml-3">Cerrar sesión</span>
                         </Link>
                     </li>
                 </ul>
