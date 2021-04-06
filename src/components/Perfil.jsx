@@ -28,7 +28,7 @@ export const Perfil = () => {
                 <Grid item xs={12}>
                     <Card>
                         <CardContent>
-                            <Typography gutterBottom={'true'} align={'center'} variant="h4">{donante.nombre} {donante.apellido}</Typography>
+                            <Typography gutterBottom={true} align={'center'} variant="h4">{donante.nombre} {donante.apellido}</Typography>
                         </CardContent>
                     </Card>
                     <Grid item xs={12}>

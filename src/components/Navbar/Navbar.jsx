@@ -55,7 +55,7 @@ export const Navbar = () => {
                         )
                     })}
                     <li className={'nav-text'}>
-                        <Link onClick={() => logout()}>
+                        <Link to="#" onClick={() => logout()}>
                             <AiIcons.AiOutlineLogout />
                             <span>Cerrar sesión</span>
                         </Link>

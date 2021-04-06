@@ -51,7 +51,7 @@ export const Solicitudes = () => {
         <Container className="my-4">
             <Grid container spacing={4}>
             {solicitudesPorTipo().map(solicitud => (
-                <Grid item xs={12} sm={6} md={4}>
+                <Grid item xs={12} sm={6} md={4} key={solicitud._id}>
                     <Solicitud solicitud={solicitud} hospital={nombreHospital(solicitud.hospital)} />
                 </Grid>
             ))}
