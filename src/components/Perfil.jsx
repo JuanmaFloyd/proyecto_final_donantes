@@ -4,6 +4,7 @@ import { Box, Grid, Card, CardContent, Container, Divider, Typography, Fab, make
 import EditIcon from "@material-ui/icons/Edit";
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
+import swal from 'sweetalert';
 
 const useStyles = makeStyles({
     button: {
@@ -62,13 +63,39 @@ export const Perfil = () => {
     }
     
     const handleEdit = () => {
-        var data = {
-            localidad: localidad,
-            domicilio: domicilio,
-            telefono: telefono,
-            mail: mail,
-            ocupacion: ocupacion
-        }
+
+        axios.get("https://maps.googleapis.com/maps/api/geocode/json", {
+            params: {
+                address: (domicilio === "" ? donante.domicilio : domicilio) + ", " + (localidad === "" ? donante.localidad : localidad),
+                key: "AIzaSyDI4eXkh46mcHYH1Qfuxp4x18sBgQG7pfc"
+            }
+        }).then(res => {
+            if (res.data.results.length === 0) {
+                swal("Revise que su domicilio y ciudad sean válidos.", "", "error")
+                return;
+            }
+
+            var location = res.data.results[0].geometry.location
+            
+            var data = {
+                localidad: localidad === "" ? donante.localidad : localidad,
+                domicilio: domicilio === "" ? donante.domicilio : domicilio,
+                telefono: telefono === "" ? donante.telefono : telefono,
+                mail: mail === "" ? donante.mail : mail,
+                ocupacion: ocupacion === "" ? donante.ocupacion : ocupacion,
+                latitud: location.lat,
+                longitud: location.lng,
+            }
+
+            axios.put("http://localhost:5000/donante", data, {"headers": {"token": sessionStorage.getItem("dtoken")}})
+                .then((res) => { 
+                    setDonante(res.data)
+                    setEdit(false)
+                })
+                .catch((error) => {
+                    swal(error.response.data, "", "error")
+                })
+        })
     }
 
     return(
@@ -239,7 +266,7 @@ export const Perfil = () => {
             <Fab onClick={() => setEdit(false)} className={classes.animated} color="secondary">
                 <CloseIcon />
             </Fab>
-            <Fab onClick={() => setEdit(false)} className={classes.button} color="primary">
+            <Fab onClick={() => handleEdit()} className={classes.button} color="primary">
                 <CheckIcon />
             </Fab>
         </Container> 
