@@ -13,6 +13,10 @@
   }
 }
 
+.offline-text{
+  background: rgba(250, 250, 250, 0.85);
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
