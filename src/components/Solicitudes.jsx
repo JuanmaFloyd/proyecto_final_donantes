@@ -56,6 +56,6 @@ export const Solicitudes = () => {
                 </Grid>
             ))}
             </Grid>
-        </Container> : <h1>No hay solicitudes disponibles.</h1> : <Spinner />
+        </Container> : <h2 className="text-center mt-5">No hay solicitudes disponibles.</h2> : <Spinner />
     )
 }
