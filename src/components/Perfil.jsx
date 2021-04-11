@@ -5,6 +5,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 import swal from 'sweetalert';
+import { Spinner } from './Spinner';
 
 const useStyles = makeStyles({
     button: {
@@ -270,6 +271,6 @@ export const Perfil = () => {
                 <CheckIcon />
             </Fab>
         </Container> 
-        : null
+        : <Spinner />
     )
 }

@@ -90,6 +90,7 @@ export const LogIn = () => {
               id="dni"
               label="DNI"
               name="dni"
+              type="number"
               autoFocus
               onChange={e => setDNI(e.target.value)}
             />

@@ -3,6 +3,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import swal from 'sweetalert'
 import Swal from 'sweetalert2'
+import { DropIcon } from './Icons/DropIcon'
 
 export const Solicitud = (props) => {
     const [donantes, setDonantes] = useState(props.solicitud.donantes)
@@ -58,7 +59,8 @@ export const Solicitud = (props) => {
                 <Typography>{"Fecha de creación: "+fecha(props.solicitud.fecha)}</Typography>
                 <Typography>{"Donaciones: "+donantes+"/"+props.solicitud.cantidad}</Typography>
                 <Typography>{"Hospital: "+props.hospital}</Typography>
-                <Typography>{"Persona beneficiada: "+props.solicitud.persona+" ("+props.solicitud.tipoDeSangre+")"}</Typography>
+                <Typography>{"Persona beneficiada: "+props.solicitud.persona}</Typography>
+                <Typography><DropIcon />{" "+ props.solicitud.tipoDeSangre}</Typography>
             </CardContent>
             <CardActions>
                 <Button size="small" color="primary" onClick={() => handleDonacion()}>
