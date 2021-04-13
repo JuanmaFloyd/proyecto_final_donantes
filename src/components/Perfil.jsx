@@ -79,6 +79,7 @@ export const Perfil = () => {
             var location = res.data.results[0].geometry.location
             
             var data = {
+                mailViejo: donante.mail,
                 localidad: localidad === "" ? donante.localidad : localidad,
                 domicilio: domicilio === "" ? donante.domicilio : domicilio,
                 telefono: telefono === "" ? donante.telefono : telefono,
