@@ -15,7 +15,7 @@ export const Solicitudes = () => {
         axios.get("http://localhost:5000/donante/info", {"headers": {"token": sessionStorage.getItem("dtoken")}})
             .then(response => setDonante(response.data))
             
-        axios.get("http://localhost:5000/solicitud")
+        axios.get("http://localhost:5000/solicitud?tipo=" + "" )
             .then(response => setSolicitudes(response.data.docs.filter(solicitud => solicitud.estado !== "Cerrada")))
         
         axios.get("http://localhost:5000/hospital")
