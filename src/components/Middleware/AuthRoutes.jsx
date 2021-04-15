@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Solicitudes } from '../Solicitudes';
+import { Solicitudes } from '../Solicitudes/Solicitudes';
 import { Navbar } from '../Navbar/Navbar';
 import { Home } from '../Home';
 import { Perfil } from '../Perfil';

@@ -4,7 +4,8 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { Solicitud } from './Solicitud';
-import { Spinner } from './Spinner';
+import { Spinner } from '../Spinner';
+import { SolicitudCard } from './SolicitudCard';
 
 export const Solicitudes = () => {
     const [solicitudes, setSolicitudes] = useState("")
@@ -53,7 +54,7 @@ export const Solicitudes = () => {
             <Grid container spacing={4}>
             {solicitudesPorTipo().map(solicitud => (
                 <Grid item xs={12} sm={6} md={4} key={solicitud._id}>
-                    <Solicitud solicitud={solicitud} hospital={nombreHospital(solicitud.hospital)} />
+                    <SolicitudCard solicitud={solicitud} hospital={nombreHospital(solicitud.hospital)} />
                 </Grid>
             ))}
             </Grid>

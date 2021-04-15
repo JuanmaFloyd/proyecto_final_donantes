@@ -1,35 +1,20 @@
-import { Button, Avatar, Card, CardActions, CardContent, Divider, Typography, makeStyles} from '@material-ui/core'
+import { Avatar, Button, Divider, Typography } from '@material-ui/core'
 import axios from 'axios'
 import React, { useState } from 'react'
+import swal from 'sweetalert'
 import Swal from 'sweetalert2'
-import swal from '@sweetalert/with-react'
+import './SolicitudCard.css'
 import withReactContent from 'sweetalert2-react-content'
-import { DropIcon } from './Icons/DropIcon'
+import { DropIcon } from '../Icons/DropIcon'
 import { SocialIcon } from 'react-social-icons'
 import { FacebookShareButton, TwitterShareButton } from 'react-share'
-import { recibeDe } from '../util/util'
+import { recibeDe } from '../../util/util'
 
 const MySwal = withReactContent(Swal)
 
-const useStyles = makeStyles({
-    botonDonar: {
-        textTransform: 'none',
-        fontWeight: 'bold'
-    },
+export const SolicitudCard = (props) => {
 
-    botonCompartir: {
-        flex: 1, 
-        textTransform: 'none',
-        fontWeight: 'bold',
-        '&:hover': {
-            background: "#fff",
-        }
-    }
-})
-
-export const Solicitud = (props) => {
     const [donantes, setDonantes] = useState(props.solicitud.donantes)
-    const classes = useStyles()
 
     const dateFormat = {
         day:    '2-digit', 
@@ -91,7 +76,6 @@ export const Solicitud = (props) => {
                 </div>,
                 showConfirmButton: false
             })
-            
         }
     }
 
@@ -111,25 +95,29 @@ export const Solicitud = (props) => {
         else return "Hospital " + nombre;
     }
 
-    return(
-        <Card>
-            <CardContent>
-                <Typography variant="h6">Solicitud de donación abierta</Typography>
-                <Divider />
+    return (
+        <div className="card card-custom bg-white border-white border-0">
+          <div className="card-custom-img" style={{backgroundImage: "url(https://ak6.picdn.net/shutterstock/videos/10028756/thumb/1.jpg)"}}></div>
+          <div className="card-custom-avatar">
+            <img className="img-fluid" src="https://media.istockphoto.com/vectors/heart-shape-vector-id936563406?k=6&m=936563406&s=612x612&w=0&h=kqOHdDoUYN9V4Dc451gXKHpSkY-KHMUekBqPTMcEJp0=" alt="Avatar" />
+          </div>
+          <div className="card-body" style={{overflowY: "auto"}}>
+            <h4 className="card-title">Solicitud de donacion abierta</h4>
+            <Divider />
                 <Typography>{"Fecha de creación: "+fecha(props.solicitud.fecha)}</Typography>
                 <Typography>{"Donaciones: "+donantes+"/"+props.solicitud.cantidad}</Typography>
                 <Typography>{"Hospital: "+props.hospital}</Typography>
                 <Typography>{"Persona beneficiada: "+props.solicitud.persona}</Typography>
                 <Typography><DropIcon />{" "+ props.solicitud.tipoDeSangre}</Typography>
-            </CardContent>
-            <CardActions>
-                <Button className={classes.botonDonar} size="large" color="primary" onClick={() => handleDonacion()}>
-                    Donar!
-                </Button>
-                <Button startIcon={<Avatar src='https://cdn.iconscout.com/icon/free/png-256/share-forword-sharing-media-social-link-viral-6-3136.png' />}
-                     className={classes.botonCompartir} size="medium" onClick={() => handleShare()}>
-                </Button>
-            </CardActions>
-        </Card>
+            </div>
+          <div className="card-footer" style={{background: "inherit", borderColor: "inherit"}}>
+            <Button className="btn" size="large" color="primary" onClick={() => handleDonacion()}>
+                Donar!
+            </Button>
+            <Button startIcon={<Avatar src='https://cdn.iconscout.com/icon/free/png-256/share-forword-sharing-media-social-link-viral-6-3136.png' />}
+                    className="btn" size="medium" onClick={() => handleShare()}>
+            </Button>
+          </div>
+        </div>
     )
 }
