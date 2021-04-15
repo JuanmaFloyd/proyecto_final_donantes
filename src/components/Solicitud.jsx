@@ -2,10 +2,12 @@ import { Button, Card, CardActions, CardContent, Divider, Typography, makeStyles
 import axios from 'axios'
 import React, { useState } from 'react'
 import Swal from 'sweetalert2'
-import swal from '@sweetalert/with-react';
+import swal from '@sweetalert/with-react'
 import withReactContent from 'sweetalert2-react-content'
 import { DropIcon } from './Icons/DropIcon'
-import { SocialIcon } from 'react-social-icons';
+import { SocialIcon } from 'react-social-icons'
+import { FacebookShareButton, TwitterShareButton } from 'react-share'
+import { recibeDe } from '../util/util'
 
 const MySwal = withReactContent(Swal)
 
@@ -96,22 +98,21 @@ export const Solicitud = (props) => {
         MySwal.fire({
             title:
             <div>
-                <h2>Compartir</h2>
+                <h2>Compartir búsqueda</h2>
                 <br />
-                <Button onClick={shareTwitter}><SocialIcon network="twitter" /></Button>
-                <Button onClick={shareFacebook}><SocialIcon network="facebook" /></Button>
+                <TwitterShareButton style={{marginRight: '10px'}} url={textoCompartir()}><SocialIcon network="twitter" /></TwitterShareButton>
+                <FacebookShareButton url={textoCompartir()}><SocialIcon network="facebook" /></FacebookShareButton>
             </div>,
             showConfirmButton: false
         })
           
     }
 
-    const shareFacebook = () => {
-        console.log("se compartio en facebook")
-    }
-
-    const shareTwitter = () => {
-        console.log("se compartio en twitter")
+    function textoCompartir() {
+        return "Hola! Se necesitan " + props.solicitud.cantidad + " dadores de sangre de tipo" +
+        recibeDe(props.solicitud.tipoDeSangre).map(item => {return ' ' + item}) +
+        " para " + props.solicitud.persona + ". Si estás interesadx por favor dirigite al hospital " +
+        props.hospital + ". Nos ayudarías mucho también compartiendo esta publicación!"
     }
 
     return(
