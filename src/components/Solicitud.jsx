@@ -1,4 +1,4 @@
-import { Button, Card, CardActions, CardContent, Divider, Typography, makeStyles} from '@material-ui/core'
+import { Button, Avatar, Card, CardActions, CardContent, Divider, Typography, makeStyles} from '@material-ui/core'
 import axios from 'axios'
 import React, { useState } from 'react'
 import Swal from 'sweetalert2'
@@ -20,7 +20,10 @@ const useStyles = makeStyles({
     botonCompartir: {
         flex: 1, 
         textTransform: 'none',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        '&:hover': {
+            background: "#fff",
+        }
     }
 })
 
@@ -124,8 +127,8 @@ export const Solicitud = (props) => {
                 <Button className={classes.botonDonar} size="large" color="primary" onClick={() => handleDonacion()}>
                     Donar!
                 </Button>
-                <Button className={classes.botonCompartir} size="large" color="primary" onClick={() => handleShare()}>
-                    Compartir
+                <Button startIcon={<Avatar src='https://cdn.iconscout.com/icon/free/png-256/share-forword-sharing-media-social-link-viral-6-3136.png' />}
+                     className={classes.botonCompartir} size="medium" onClick={() => handleShare()}>
                 </Button>
             </CardActions>
         </Card>
