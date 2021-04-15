@@ -1,11 +1,13 @@
-import { Button, IconButton, Card, CardActions, CardContent, Divider, Typography, makeStyles} from '@material-ui/core'
+import { Button, Card, CardActions, CardContent, Divider, Typography, makeStyles} from '@material-ui/core'
 import axios from 'axios'
 import React, { useState } from 'react'
 import Swal from 'sweetalert2'
 import swal from '@sweetalert/with-react';
+import withReactContent from 'sweetalert2-react-content'
 import { DropIcon } from './Icons/DropIcon'
-import FacebookIcon from '@material-ui/icons/Facebook';
-import TwitterIcon from '@material-ui/icons/Twitter';
+import { SocialIcon } from 'react-social-icons';
+
+const MySwal = withReactContent(Swal)
 
 const useStyles = makeStyles({
     botonDonar: {
@@ -91,21 +93,25 @@ export const Solicitud = (props) => {
     }
 
     const handleShare = () => {
-        swal(
+        MySwal.fire({
+            title:
             <div>
-            <div className={classes.overlay}></div>
-            <div /*className={classes.share}*/>
                 <h2>Compartir</h2>
                 <br />
-                <IconButton><FacebookIcon /></IconButton>
-                <IconButton><TwitterIcon /></IconButton>
-            </div>
-            </div>, {buttons: false}
-          )
+                <Button onClick={shareTwitter}><SocialIcon network="twitter" /></Button>
+                <Button onClick={shareFacebook}><SocialIcon network="facebook" /></Button>
+            </div>,
+            showConfirmButton: false
+        })
+          
     }
 
     const shareFacebook = () => {
-        console.log("hola")
+        console.log("se compartio en facebook")
+    }
+
+    const shareTwitter = () => {
+        console.log("se compartio en twitter")
     }
 
     return(
