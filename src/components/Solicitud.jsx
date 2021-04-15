@@ -21,29 +21,6 @@ const useStyles = makeStyles({
         flex: 1, 
         textTransform: 'none',
         fontWeight: 'bold'
-    },
-
-    overlay: {
-        opacity: 1,
-        position: 'absolute',
-        zIndex: 0,
-        top: 0,
-        left: 0,
-        width: '100vw',
-        heigth: '100vh',
-        background: 'rgba(0,0,0,.5)'
-    },
-
-    share: {
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        top: '30%',
-        margin: 'auto',
-        width: '50%',
-        zIndex: 1,
-        padding: '1em',
-        background: 'white' 
     }
 })
 
@@ -94,25 +71,42 @@ export const Solicitud = (props) => {
         })
     }
 
+    //Compartir en FB no funciona en localhost
+
     const handleShare = () => {
-        MySwal.fire({
-            title:
-            <div>
-                <h2>Compartir búsqueda</h2>
-                <br />
-                <TwitterShareButton style={{marginRight: '10px'}} url={textoCompartir()}><SocialIcon network="twitter" /></TwitterShareButton>
-                <FacebookShareButton url={textoCompartir()}><SocialIcon network="facebook" /></FacebookShareButton>
-            </div>,
-            showConfirmButton: false
-        })
-          
+        if(navigator.share){
+            navigator.share({
+                text: textoCompartir()
+            }).catch(console.error);
+        }
+        else {
+            MySwal.fire({
+                title:
+                <div>
+                    <h2>Compartir búsqueda</h2>
+                    <br />
+                    <TwitterShareButton style={{marginRight: '10px'}} url={textoCompartir()}><SocialIcon network="twitter" /></TwitterShareButton>
+                    <FacebookShareButton url={textoCompartir()}><SocialIcon network="facebook" /></FacebookShareButton>
+                </div>,
+                showConfirmButton: false
+            })
+            
+        }
     }
 
     function textoCompartir() {
-        return "Hola! Se necesitan " + props.solicitud.cantidad + " dadores de sangre de tipo" +
-        recibeDe(props.solicitud.tipoDeSangre).map(item => {return ' ' + item}) +
-        " para " + props.solicitud.persona + ". Si estás interesadx por favor dirigite al hospital " +
-        props.hospital + ". Nos ayudarías mucho también compartiendo esta publicación!"
+        var inicio = props.solicitud.cantidad > 1 ? "Hola! Se necesitan " + props.solicitud.cantidad + " dadores"
+            : "Hola! Se necesita un dador"
+    
+        return inicio + " de sangre de tipo" + recibeDe(props.solicitud.tipoDeSangre).map(item => {return ' ' + item})
+        + " para " + props.solicitud.persona + ". Si estás interesadx por favor dirigite al " +
+        stringHospital(props.hospital) + ". Nos ayudarías mucho también compartiendo esta publicación! 🩸❤️"
+    }
+
+    function stringHospital(nombre){
+        if(nombre.startsWith("hospital") || nombre.startsWith("Hospital"))
+            return nombre[0].toUpperCase() + nombre.substring(1)
+        else return "Hospital " + nombre;
     }
 
     return(
