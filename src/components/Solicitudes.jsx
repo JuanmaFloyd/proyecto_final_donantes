@@ -10,12 +10,13 @@ export const Solicitudes = () => {
     const [solicitudes, setSolicitudes] = useState("")
     const [hospitales, setHospitales] = useState("")
     const [donante, setDonante] = useState("")
+    const tipo = ""
 
     useEffect(() => {
         axios.get("http://localhost:5000/donante/info", {"headers": {"token": sessionStorage.getItem("dtoken")}})
             .then(response => setDonante(response.data))
             
-        axios.get("http://localhost:5000/solicitud?tipo=" + "" )
+        axios.get('http://localhost:5000/solicitud?tipo='+ tipo)
             .then(response => setSolicitudes(response.data.docs.filter(solicitud => solicitud.estado !== "Cerrada")))
         
         axios.get("http://localhost:5000/hospital")

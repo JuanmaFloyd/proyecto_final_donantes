@@ -1,12 +1,51 @@
-import { Button, Card, CardActions, CardContent, Divider, Typography } from '@material-ui/core'
+import { Button, IconButton, Card, CardActions, CardContent, Divider, Typography, makeStyles} from '@material-ui/core'
 import axios from 'axios'
 import React, { useState } from 'react'
-import swal from 'sweetalert'
 import Swal from 'sweetalert2'
+import swal from '@sweetalert/with-react';
 import { DropIcon } from './Icons/DropIcon'
+import FacebookIcon from '@material-ui/icons/Facebook';
+import TwitterIcon from '@material-ui/icons/Twitter';
+
+const useStyles = makeStyles({
+    botonDonar: {
+        textTransform: 'none',
+        fontWeight: 'bold'
+    },
+
+    botonCompartir: {
+        flex: 1, 
+        textTransform: 'none',
+        fontWeight: 'bold'
+    },
+
+    overlay: {
+        opacity: 1,
+        position: 'absolute',
+        zIndex: 0,
+        top: 0,
+        left: 0,
+        width: '100vw',
+        heigth: '100vh',
+        background: 'rgba(0,0,0,.5)'
+    },
+
+    share: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: '30%',
+        margin: 'auto',
+        width: '50%',
+        zIndex: 1,
+        padding: '1em',
+        background: 'white' 
+    }
+})
 
 export const Solicitud = (props) => {
     const [donantes, setDonantes] = useState(props.solicitud.donantes)
+    const classes = useStyles()
 
     const dateFormat = {
         day:    '2-digit', 
@@ -31,7 +70,7 @@ export const Solicitud = (props) => {
             title: "Desea inscribirse para donar a "+props.solicitud.persona+"?",
             showDenyButton: true,
             denyButtonText: "No, cancelar",
-            confirmButtonText: "Sí, deseo inscrbirme"
+            confirmButtonText: "Sí, deseo inscrbirme"            
         }).then((result) => {
             if (result.isConfirmed) {
                 var data = {
@@ -51,6 +90,24 @@ export const Solicitud = (props) => {
         })
     }
 
+    const handleShare = () => {
+        swal(
+            <div>
+            <div className={classes.overlay}></div>
+            <div /*className={classes.share}*/>
+                <h2>Compartir</h2>
+                <br />
+                <IconButton><FacebookIcon /></IconButton>
+                <IconButton><TwitterIcon /></IconButton>
+            </div>
+            </div>, {buttons: false}
+          )
+    }
+
+    const shareFacebook = () => {
+        console.log("hola")
+    }
+
     return(
         <Card>
             <CardContent>
@@ -63,8 +120,11 @@ export const Solicitud = (props) => {
                 <Typography><DropIcon />{" "+ props.solicitud.tipoDeSangre}</Typography>
             </CardContent>
             <CardActions>
-                <Button size="small" color="primary" onClick={() => handleDonacion()}>
+                <Button className={classes.botonDonar} size="large" color="primary" onClick={() => handleDonacion()}>
                     Donar!
+                </Button>
+                <Button className={classes.botonCompartir} size="large" color="primary" onClick={() => handleShare()}>
+                    Compartir
                 </Button>
             </CardActions>
         </Card>
