@@ -74,8 +74,6 @@ export const Solicitud = (props) => {
         })
     }
 
-    //Compartir en FB no funciona en localhost
-
     const handleShare = () => {
         if(navigator.share){
             navigator.share({
