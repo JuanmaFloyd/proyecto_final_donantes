@@ -77,19 +77,19 @@ export const Solicitud = (props) => {
     //Compartir en FB no funciona en localhost
 
     const handleShare = () => {
-        if(navigator.share){
+      /*  if(navigator.share){
             navigator.share({
                 text: textoCompartir()
             }).catch(console.error);
         }
-        else {
+        else*/ {
             MySwal.fire({
                 title:
                 <div>
                     <h2>Compartir búsqueda</h2>
                     <br />
                     <TwitterShareButton style={{marginRight: '10px'}} url={textoCompartir()}><SocialIcon network="twitter" /></TwitterShareButton>
-                    <FacebookShareButton url={textoCompartir()}><SocialIcon network="facebook" /></FacebookShareButton>
+                    <FacebookShareButton url={'www.google.com'} quote={textoCompartir('fb')}><SocialIcon network="facebook" /></FacebookShareButton>
                 </div>,
                 showConfirmButton: false
             })
@@ -97,13 +97,14 @@ export const Solicitud = (props) => {
         }
     }
 
-    function textoCompartir() {
+    function textoCompartir(red) {
         var inicio = props.solicitud.cantidad > 1 ? "Hola! Se necesitan " + props.solicitud.cantidad + " dadores"
             : "Hola! Se necesita un dador"
+        var fin = red === 'fb' ? "<3" : "🩸❤️"
     
         return inicio + " de sangre de tipo" + recibeDe(props.solicitud.tipoDeSangre).map(item => {return ' ' + item})
         + " para " + props.solicitud.persona + ". Si estás interesadx por favor dirigite al " +
-        stringHospital(props.hospital) + ". Nos ayudarías mucho también compartiendo esta publicación! 🩸❤️"
+        stringHospital(props.hospital) + ". Nos ayudarías mucho también compartiendo esta publicación! " + fin
     }
 
     function stringHospital(nombre){
