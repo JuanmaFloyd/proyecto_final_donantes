@@ -7,7 +7,7 @@ import './SolicitudCard.css'
 import withReactContent from 'sweetalert2-react-content'
 import { DropIcon } from '../Icons/DropIcon'
 import { SocialIcon } from 'react-social-icons'
-import { FacebookShareButton, TwitterShareButton } from 'react-share'
+import { FacebookShareButton, TwitterShareButton, WhatsappShareButton } from 'react-share'
 import { recibeDe } from '../../util/util'
 
 const MySwal = withReactContent(Swal)
@@ -60,18 +60,19 @@ export const SolicitudCard = (props) => {
     }
 
     const handleShare = () => {
-        if(navigator.share){
+      /*  if(navigator.share){
             navigator.share({
                 text: textoCompartir()
             }).catch(console.error);
         }
-        else {
+        else*/ {
             MySwal.fire({
                 title:
                 <div>
                     <h2>Compartir búsqueda</h2>
                     <br />
                     <TwitterShareButton style={{marginRight: '10px'}} url={textoCompartir()}><SocialIcon network="twitter" /></TwitterShareButton>
+                    <WhatsappShareButton style={{marginRight: '10px'}} url={textoCompartir()}><SocialIcon network="whatsapp" /></WhatsappShareButton>
                     <FacebookShareButton url={'www.google.com'} quote={textoCompartir('fb')}><SocialIcon network="facebook" /></FacebookShareButton>
                 </div>,
                 showConfirmButton: false
