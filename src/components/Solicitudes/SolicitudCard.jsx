@@ -81,7 +81,7 @@ export const SolicitudCard = (props) => {
     }
 
     function textoCompartir(red) {
-        var inicio = props.solicitud.cantidad > 1 ? "Hola! Se necesitan " + props.solicitud.cantidad + " dadores"
+        var inicio = (props.solicitud.cantidad - parseInt(donantes)) > 1 ? "Hola! Se necesitan " + (props.solicitud.cantidad - parseInt(donantes)) + " dadores"
             : "Hola! Se necesita un dador"
         var fin = red === 'fb' ? "<3" : "🩸❤️"
     
