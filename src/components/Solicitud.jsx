@@ -77,12 +77,12 @@ export const Solicitud = (props) => {
     //Compartir en FB no funciona en localhost
 
     const handleShare = () => {
-      /*  if(navigator.share){
+        if(navigator.share){
             navigator.share({
                 text: textoCompartir()
             }).catch(console.error);
         }
-        else*/ {
+        else {
             MySwal.fire({
                 title:
                 <div>
