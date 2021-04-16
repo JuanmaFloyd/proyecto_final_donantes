@@ -86,7 +86,7 @@ export const SolicitudCard = (props) => {
         var fin = red === 'fb' ? "<3" : "🩸❤️"
     
         return inicio + " de sangre de tipo" + recibeDe(props.solicitud.tipoDeSangre).map(item => {return ' ' + item})
-        + " para " + props.solicitud.persona + ". Si estás interesadx por favor dirigite al " +
+        + " para " + props.solicitud.persona + ". Si estás interesadx en donar por favor dirigite al " +
         stringHospital(props.hospital) + ". Nos ayudarías mucho también compartiendo esta publicación! " + fin
     }
 
