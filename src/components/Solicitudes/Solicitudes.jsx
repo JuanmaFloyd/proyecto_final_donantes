@@ -4,6 +4,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { Spinner } from '../Spinner';
+import { FiltroPorTipo } from '../Utils/FiltroPorTipo';
 import { SolicitudCard } from './SolicitudCard';
 
 export const Solicitudes = () => {
@@ -27,31 +28,13 @@ export const Solicitudes = () => {
         const hospital = hospitales.filter(hospital => hospital._id === id)
         return hospital[0].nombre
     }
-
-    const solicitudesPorTipo = () => {
-        if (donante.tipoDeSangre === "A+")
-            return solicitudes.filter(solicitud => (solicitud.tipoDeSangre === "A+" || solicitud.tipoDeSangre ==="AB+"))
-        if (donante.tipoDeSangre === "A-")
-            return solicitudes.filter(solicitud => (solicitud.tipoDeSangre === "A+" || solicitud.tipoDeSangre ==="AB+" || solicitud.tipoDeSangre ==="A-" || solicitud.tipoDeSangre ==="AB-"))
-        if (donante.tipoDeSangre === "B+")
-            return solicitudes.filter(solicitud => (solicitud.tipoDeSangre === "B+" || solicitud.tipoDeSangre ==="AB+"))
-        if (donante.tipoDeSangre === "B-")
-            return solicitudes.filter(solicitud => (solicitud.tipoDeSangre === "B+" || solicitud.tipoDeSangre ==="AB+" || solicitud.tipoDeSangre ==="B-" || solicitud.tipoDeSangre ==="AB-"))
-        if (donante.tipoDeSangre === "AB+")
-            return solicitudes.filter(solicitud => (solicitud.tipoDeSangre ==="AB+"))
-        if (donante.tipoDeSangre === "AB-")
-            return solicitudes.filter(solicitud => (solicitud.tipoDeSangre ==="AB+" || solicitud.tipoDeSangre ==="AB-"))
-        if (donante.tipoDeSangre === "0+")
-            return solicitudes.filter(solicitud => (solicitud.tipoDeSangre === "A+" || solicitud.tipoDeSangre ==="AB+" || solicitud.tipoDeSangre ==="B+" || solicitud.tipoDeSangre ==="0+"))
-        return solicitudes;        
-    }
     
     return(
         hospitales && solicitudes ?
-        solicitudesPorTipo().length > 0 && hospitales.length > 0 ?
+        FiltroPorTipo(solicitudes).length > 0 && hospitales.length > 0 ?
         <Container className="my-4">
             <Grid container spacing={4}>
-            {solicitudesPorTipo().map(solicitud => (
+            {FiltroPorTipo(solicitudes, donante.tipoDeSangre).map(solicitud => (
                 <Grid item xs={12} sm={6} md={4} key={solicitud._id}>
                     <SolicitudCard solicitud={solicitud} hospital={nombreHospital(solicitud.hospital)} />
                 </Grid>

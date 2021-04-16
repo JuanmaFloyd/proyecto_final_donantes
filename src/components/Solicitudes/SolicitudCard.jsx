@@ -85,7 +85,7 @@ export const SolicitudCard = (props) => {
         var fin = red === 'fb' ? "<3" : "🩸❤️"
     
         return inicio + " de sangre de tipo" + recibeDe(props.solicitud.tipoDeSangre).map(item => {return ' ' + item})
-        + " para " + props.solicitud.persona + ". Si estás interesadx por favor dirigite al " +
+        + " para " + props.solicitud.persona + ". Si estás interesadx, por favor registrate para donar en la página y dirigite al " +
         stringHospital(props.hospital) + ". Nos ayudarías mucho también compartiendo esta publicación! " + fin
     }
 
@@ -102,7 +102,7 @@ export const SolicitudCard = (props) => {
             <img className="img-fluid" src="https://media.istockphoto.com/vectors/heart-shape-vector-id936563406?k=6&m=936563406&s=612x612&w=0&h=kqOHdDoUYN9V4Dc451gXKHpSkY-KHMUekBqPTMcEJp0=" alt="Avatar" />
           </div>
           <div className="card-body" style={{overflowY: "auto"}}>
-            <h4 className="card-title">Solicitud de donacion abierta</h4>
+            <h4 className="card-title">Solicitud de donación abierta</h4>
             <Divider />
                 <Typography>{"Fecha de creación: "+fecha(props.solicitud.fecha)}</Typography>
                 <Typography>{"Donaciones: "+donantes+"/"+props.solicitud.cantidad}</Typography>
