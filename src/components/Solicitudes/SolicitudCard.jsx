@@ -7,7 +7,7 @@ import './SolicitudCard.css'
 import withReactContent from 'sweetalert2-react-content'
 import { DropIcon } from '../Icons/DropIcon'
 import { SocialIcon } from 'react-social-icons'
-import { FacebookShareButton, TwitterShareButton } from 'react-share'
+import { FacebookShareButton, TwitterShareButton, WhatsappShareButton } from 'react-share'
 import { recibeDe } from '../../util/util'
 
 const MySwal = withReactContent(Swal)
@@ -72,6 +72,7 @@ export const SolicitudCard = (props) => {
                     <h2>Compartir búsqueda</h2>
                     <br />
                     <TwitterShareButton style={{marginRight: '10px'}} url={textoCompartir()}><SocialIcon network="twitter" /></TwitterShareButton>
+                    <WhatsappShareButton style={{marginRight: '10px'}} url={textoCompartir()}><SocialIcon network="whatsapp" /></WhatsappShareButton>
                     <FacebookShareButton url={'www.google.com'} quote={textoCompartir('fb')}><SocialIcon network="facebook" /></FacebookShareButton>
                 </div>,
                 showConfirmButton: false
@@ -80,7 +81,7 @@ export const SolicitudCard = (props) => {
     }
 
     function textoCompartir(red) {
-        var inicio = props.solicitud.cantidad > 1 ? "Hola! Se necesitan " + props.solicitud.cantidad + " dadores"
+        var inicio = (props.solicitud.cantidad - parseInt(donantes)) > 1 ? "Hola! Se necesitan " + (props.solicitud.cantidad - parseInt(donantes)) + " dadores"
             : "Hola! Se necesita un dador"
         var fin = red === 'fb' ? "<3" : "🩸❤️"
     

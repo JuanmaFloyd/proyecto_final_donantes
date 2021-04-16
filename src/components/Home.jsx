@@ -27,11 +27,11 @@ export const Home = () => {
         <Container className="mt-5">
             <Card>
                 <CardContent>
-                    <Typography variant="h4">{(donante.sexo === "masculino") ? "Bienvenido, "+donante.nombre : "Bienvenida, "+donante.nombre}</Typography>
+                    <Typography style={{fontSize: '2.5em'}}>{(donante.sexo === "masculino") ? "Bienvenido, "+ donante.nombre : "Bienvenida, "+ donante.nombre}</Typography>
                     <Box m={2}>
                         <Divider variant="middle" />
                     </Box>
-                    <Typography variant="subtitle1" color="primary">
+                    <Typography style={{fontSize: '1em'}} color="primary">
                         {   !donante.anotadoEnSolicitud ? (
                                 donante.fechaDonacion ? 
                                 "Su última fecha de donación es el "+(fechaDon().getDate()+1)+"/"+(fechaDon().getMonth()+1)+"/"+fechaDon().getFullYear()+ "." 
