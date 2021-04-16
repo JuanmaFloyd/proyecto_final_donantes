@@ -84,10 +84,15 @@ export const SolicitudCard = (props) => {
         var inicio = (props.solicitud.cantidad - parseInt(donantes)) > 1 ? "Hola! Se necesitan " + (props.solicitud.cantidad - parseInt(donantes)) + " dadores"
             : "Hola! Se necesita un dador"
         var fin = red === 'fb' ? "<3" : "🩸❤️"
+
+        var tiposCompatibles = recibeDe(props.solicitud.tipoDeSangre)
+        var strTipos = tiposCompatibles.join(", ")
+        var ultimoTipo = strTipos.substring(strTipos.length - 2, strTipos.length)
+        var strFinal = strTipos.substring(0, strTipos.length - 4) + ' y ' + ultimoTipo
     
-        return inicio + " de sangre de tipo" + recibeDe(props.solicitud.tipoDeSangre).map(item => {return ' ' + item})
-        + " para " + props.solicitud.persona + ". Si estás interesadx en donar por favor dirigite al " +
-        stringHospital(props.hospital) + ". Nos ayudarías mucho también compartiendo esta publicación! " + fin
+        return inicio + " de sangre de tipo " + strFinal + " para " + props.solicitud.persona +
+        ". Si estás interesadx en donar por favor dirigite al " + stringHospital(props.hospital)
+        + ". Nos ayudarías mucho también compartiendo esta publicación! " + fin
     }
 
     function stringHospital(nombre){
