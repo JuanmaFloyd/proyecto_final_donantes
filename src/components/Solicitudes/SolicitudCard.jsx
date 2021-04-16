@@ -60,12 +60,12 @@ export const SolicitudCard = (props) => {
     }
 
     const handleShare = () => {
-      /*  if(navigator.share){
+        if(navigator.share){
             navigator.share({
                 text: textoCompartir()
             }).catch(console.error);
         }
-        else*/ {
+        else {
             MySwal.fire({
                 title:
                 <div>
