@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { Spinner } from '../Spinner';
 import { FiltroPorTipo } from '../Utils/FiltroPorTipo';
 import { SolicitudCard } from './SolicitudCard';
+import { WarningMsg } from '../WarningMsg/WarningMsg';
 
 export const Solicitudes = () => {
     const [solicitudes, setSolicitudes] = useState("")
@@ -33,6 +34,7 @@ export const Solicitudes = () => {
         hospitales && solicitudes ?
         FiltroPorTipo(solicitudes).length > 0 && hospitales.length > 0 ?
         <Container className="my-4">
+            <WarningMsg />
             <Grid container spacing={4}>
             {FiltroPorTipo(solicitudes, donante.tipoDeSangre).map(solicitud => (
                 <Grid item xs={12} sm={6} md={4} key={solicitud._id}>

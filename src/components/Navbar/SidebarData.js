@@ -1,13 +1,7 @@
 import React from 'react';
-import { AiFillHome, AiFillDatabase, AiFillSmile } from "react-icons/ai";
+import { AiFillDatabase, AiFillSmile } from "react-icons/ai";
 
 export const SidebarData = [
-    {
-        title: 'Inicio',
-        path: '/',
-        icon: <AiFillHome />,
-        cName: 'nav-text'
-    },
     {
         title: 'Solicitudes',
         path: '/solicitudes',
