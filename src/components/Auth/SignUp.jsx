@@ -97,7 +97,7 @@ export const SignUp = () => {
                     axios.post("http://localhost:5000/donante/signin", dataLogin)
                         .then(res => {
                             sessionStorage.setItem("dtoken", res.data);
-                            history.push("/");
+                            history.push("/solicitudes");
                         })
                 })
                 .catch((error) => {

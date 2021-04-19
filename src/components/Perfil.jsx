@@ -6,6 +6,7 @@ import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 import swal from 'sweetalert';
 import { Spinner } from './Spinner';
+import { DateParser } from './Utils/DateParser'
 
 const useStyles = makeStyles({
     button: {
@@ -52,11 +53,6 @@ export const Perfil = () => {
             .then(response => setDonante(response.data))
     }, [])
 
-    function parseDate(fecha) {
-        var date = new Date(fecha)
-        return (date.getDate()+1)+"/"+(date.getMonth()+1)+"/"+date.getFullYear()        
-    }
-
     function diasUltDonacion(){
         var hoy = new Date()
         var ultimaDon = new Date(donante.fechaDonacion)
@@ -99,7 +95,7 @@ export const Perfil = () => {
                 })
         })
     }
-
+    
     return(
         donante ?
         !edit ?
@@ -134,7 +130,7 @@ export const Perfil = () => {
                 <Grid item xs={4}>
                     <Card>
                         <CardContent>
-                            Fecha de nacimiento: {parseDate(donante.fechaNac)}
+                            Fecha de nacimiento: {DateParser(donante.fechaNac)}
                         </CardContent>
                     </Card>
                 </Grid>
@@ -184,7 +180,7 @@ export const Perfil = () => {
                     <Card>
                         <CardContent>
                             Última Donación: { donante.fechaDonacion ?
-                                parseDate(donante.fechaDonacion) + " (hace " + diasUltDonacion() +" días)." 
+                                DateParser(donante.fechaDonacion) + " (hace " + diasUltDonacion() +" días)." 
                                 : "Sin donaciones"}
                         </CardContent>
                     </Card>
