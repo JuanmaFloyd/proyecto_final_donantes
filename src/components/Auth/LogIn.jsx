@@ -63,7 +63,7 @@ export const LogIn = () => {
       axios.post("http://localhost:5000/donante/signin", data)
           .then(res => {
               sessionStorage.setItem("dtoken", res.data);
-              history.push("/");
+              history.push("/solicitudes");
           })
           .catch(
               () => swal("Nickname o contraseña incorrectos", "", "error")
