@@ -60,12 +60,12 @@ export const SolicitudCard = (props) => {
     }
 
     const handleShare = () => {
-        if(navigator.share){
+       /* if(navigator.share){
             navigator.share({
                 text: textoCompartir()
             }).catch(console.error);
         }
-        else {
+        else */{
             MySwal.fire({
                 title:
                 <div>
@@ -88,7 +88,7 @@ export const SolicitudCard = (props) => {
         var tiposCompatibles = recibeDe(props.solicitud.tipoDeSangre)
         var strTipos = tiposCompatibles.join(", ")
         var ultimoTipo = strTipos.substring(strTipos.length - 2, strTipos.length)
-        var strFinal = strTipos.substring(0, strTipos.length - 4) + ' y ' + ultimoTipo
+        var strFinal = tiposCompatibles.length > 1 ? strTipos.substring(0, strTipos.length - 4) + ' y ' + ultimoTipo : tiposCompatibles[0]
     
         return inicio + " de sangre de tipo " + strFinal + " para " + props.solicitud.persona +
         ". Si estás interesadx en donar por favor dirigite al " + stringHospital(props.hospital)
