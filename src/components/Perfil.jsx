@@ -42,6 +42,7 @@ export const Perfil = () => {
     const [donante, setDonante] = useState("")
     const [edit, setEdit] = useState(false)
     const [domicilio, setDomicilio] = useState("");
+    const [domicilioDNI, setDomicilioDNI] = useState("");
     const [telefono, setTelefono] = useState("");
     const [localidad, setLocalidad] = useState("");
     const [ocupacion, setOcupacion] = useState("");
@@ -78,6 +79,7 @@ export const Perfil = () => {
                 mailViejo: donante.mail,
                 localidad: localidad === "" ? donante.localidad : localidad,
                 domicilio: domicilio === "" ? donante.domicilio : domicilio,
+                domicilioDNI: domicilioDNI === "" ? donante.domicilioDNI : domicilioDNI,
                 telefono: telefono === "" ? donante.telefono : telefono,
                 mail: mail === "" ? donante.mail : mail,
                 ocupacion: ocupacion === "" ? donante.ocupacion : ocupacion,
@@ -151,6 +153,13 @@ export const Perfil = () => {
                 <Grid item xs={4}>
                     <Card>
                         <CardContent>
+                            Domicilio en DNI: {donante.domicilioDNI}
+                        </CardContent>
+                    </Card>
+                </Grid>
+                <Grid item xs={4}>
+                    <Card>
+                        <CardContent>
                             Localidad: {donante.localidad}
                             </CardContent>
                     </Card>
@@ -214,6 +223,17 @@ export const Perfil = () => {
                         defaultValue={donante.domicilio}
                         fullWidth
                         onChange={(event) => setDomicilio(event.target.value)}
+                    />
+                </Grid>
+                <Grid item xs={4}>
+                    <TextField 
+                        id="domicilioDNI"
+                        name="domicilioDNI"
+                        label="Domicilio en DNI"
+                        variant="outlined"
+                        defaultValue={donante.domicilioDNI}
+                        fullWidth
+                        onChange={(event) => setDomicilioDNI(event.target.value)}
                     />
                 </Grid>
                 <Grid item xs={4}>
