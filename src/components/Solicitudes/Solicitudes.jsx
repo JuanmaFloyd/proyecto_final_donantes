@@ -7,6 +7,7 @@ import { Spinner } from '../Spinner';
 import { FiltroPorTipo } from '../Utils/FiltroPorTipo';
 import { SolicitudCard } from './SolicitudCard';
 import { WarningMsg } from '../WarningMsg/WarningMsg';
+import { Alert } from '@material-ui/lab';
 
 export const Solicitudes = () => {
     const [solicitudes, setSolicitudes] = useState("")
@@ -34,6 +35,11 @@ export const Solicitudes = () => {
         FiltroPorTipo(solicitudes).length > 0 && hospitales.length > 0 ?
         <Container className="my-4">
             <WarningMsg />
+            <Alert severity="success" className="mb-3">
+            {
+                "Las solicitudes que estás viendo ya se encuentran filtradas según tu tipo de sangre (" +  donante.tipoDeSangre  + "). Podés inscribirte a cualquiera de ellas."
+            } 
+            </Alert> 
             <Grid container spacing={4}>
             {FiltroPorTipo(solicitudes, donante.tipoDeSangre).map(solicitud => (
                 <Grid item xs={12} sm={6} md={4} key={solicitud._id}>

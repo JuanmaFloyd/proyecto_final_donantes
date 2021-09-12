@@ -22,11 +22,11 @@ export const WarningMsg = () => {
     return(
         donante ?
             !donante.anotadoEnSolicitud ? null :
-            <Alert severity="warning" className="mb-5">
+            <Alert severity="warning" className="mb-3">
             {
                 persona !== "" && hospital !== "" ?
-                "Usted se encuentra en lista para la solicitud correspondiente a "+ util.getIniciales(persona) +
-                " Para efectuar la donación, diríjase al hospital "+ hospital + "." : "Cargando..."
+                "Estás en lista para la solicitud correspondiente a "+ util.getIniciales(persona) +
+                " Para efectuar la donación, dirigite al hospital "+ hospital + "." : "Cargando..."
             } 
             </Alert> : null
     )
