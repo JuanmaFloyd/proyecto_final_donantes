@@ -30,3 +30,11 @@ export function recibeDe(tipoSangre){
     }
     return res
 }
+
+export function getIniciales(persona){
+    const fullName = persona.split(' ');
+    const initials = fullName.length > 1 ?
+                        fullName[0].charAt(0) + "." + fullName[1].charAt(0) + ".":
+                        fullName[0].charAt(0) + ".";
+    return initials.toUpperCase();
+}

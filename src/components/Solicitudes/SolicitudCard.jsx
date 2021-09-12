@@ -8,7 +8,7 @@ import withReactContent from 'sweetalert2-react-content'
 import { DropIcon } from '../Icons/DropIcon'
 import { SocialIcon } from 'react-social-icons'
 import { FacebookShareButton, TwitterShareButton, WhatsappShareButton } from 'react-share'
-import { recibeDe } from '../../util/util'
+import * as util from '../../util/util.js'
 
 const MySwal = withReactContent(Swal)
 
@@ -36,7 +36,7 @@ export const SolicitudCard = (props) => {
 
     const handleDonacion = () => {
         Swal.fire({
-            title: "Desea inscribirse para donar a "+props.solicitud.persona+"?",
+            title: "Desea inscribirse para donar a " + util.getIniciales(props.solicitud.persona) + "?",
             showDenyButton: true,
             denyButtonText: "No, cancelar",
             confirmButtonText: "Sí, deseo inscrbirme"            
@@ -85,13 +85,13 @@ export const SolicitudCard = (props) => {
             : "Hola! Se necesita un dador"
         var fin = red === 'fb' ? "<3" : "🩸❤️"
 
-        var tiposCompatibles = recibeDe(props.solicitud.tipoDeSangre)
+        var tiposCompatibles = util.recibeDe(props.solicitud.tipoDeSangre)
         var strTipos = tiposCompatibles.join(", ")
         var ultimoTipo = strTipos.substring(strTipos.length - 2, strTipos.length)
         var strFinal = tiposCompatibles.length > 1 ? strTipos.substring(0, strTipos.length - 4) + ' y ' + ultimoTipo : tiposCompatibles[0]
     
-        return inicio + " de sangre de tipo " + strFinal + " para " + props.solicitud.persona +
-        ". Si estás interesadx en donar por favor dirigite al " + stringHospital(props.hospital)
+        return inicio + " de sangre de tipo " + strFinal + " para " + util.getIniciales(props.solicitud.persona) +
+        " Si estás interesadx en donar por favor dirigite al " + stringHospital(props.hospital)
         + ". Nos ayudarías mucho también compartiendo esta publicación! " + fin
     }
 
@@ -121,7 +121,7 @@ export const SolicitudCard = (props) => {
                 <Typography>{"Fecha de creación: "+fecha(props.solicitud.fecha)}</Typography>
                 <Typography>{"Donaciones: "+donantes+"/"+props.solicitud.cantidad}</Typography>
                 <Typography>{"Hospital: "+props.hospital}</Typography>
-                <Typography>{"Persona beneficiada: "+getIniciales(props.solicitud.persona)}</Typography>
+                <Typography>{"Persona beneficiada: "+ util.getIniciales(props.solicitud.persona)}</Typography>
                 <Typography><DropIcon />{" "+ props.solicitud.tipoDeSangre}</Typography>
             </div>
           <div className="card-footer" style={{background: "inherit", borderColor: "inherit"}}>

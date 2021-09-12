@@ -1,6 +1,7 @@
 import { Alert } from '@material-ui/lab';
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import * as util from '../../util/util.js'
 
 export const WarningMsg = () => {
     const [donante, setDonante] = useState("")
@@ -24,8 +25,8 @@ export const WarningMsg = () => {
             <Alert severity="warning" className="mb-5">
             {
                 persona !== "" && hospital !== "" ?
-                "Usted se encuentra en lista para la solicitud correspondiente a "+persona+
-                ". Para efectuar la donación, diríjase al hospital "+hospital+"." : "Cargando..."
+                "Usted se encuentra en lista para la solicitud correspondiente a "+ util.getIniciales(persona) +
+                " Para efectuar la donación, diríjase al hospital "+ hospital + "." : "Cargando..."
             } 
             </Alert> : null
     )
