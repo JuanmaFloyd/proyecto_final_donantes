@@ -101,6 +101,14 @@ export const SolicitudCard = (props) => {
         else return "Hospital " + nombre;
     }
 
+    function getIniciales(persona){
+        const fullName = persona.split(' ');
+        const initials = fullName.length > 1 ?
+                            fullName[0].charAt(0) + "." + fullName[1].charAt(0) + ".":
+                            fullName[0].charAt(0);
+        return initials.toUpperCase();
+    }
+
     return (
         <div className="card card-custom bg-white border-white border-0">
           <div className="card-custom-img" style={{backgroundImage: "url(https://ak6.picdn.net/shutterstock/videos/10028756/thumb/1.jpg)"}}></div>
@@ -113,7 +121,7 @@ export const SolicitudCard = (props) => {
                 <Typography>{"Fecha de creación: "+fecha(props.solicitud.fecha)}</Typography>
                 <Typography>{"Donaciones: "+donantes+"/"+props.solicitud.cantidad}</Typography>
                 <Typography>{"Hospital: "+props.hospital}</Typography>
-                <Typography>{"Persona beneficiada: "+props.solicitud.persona}</Typography>
+                <Typography>{"Persona beneficiada: "+getIniciales(props.solicitud.persona)}</Typography>
                 <Typography><DropIcon />{" "+ props.solicitud.tipoDeSangre}</Typography>
             </div>
           <div className="card-footer" style={{background: "inherit", borderColor: "inherit"}}>
